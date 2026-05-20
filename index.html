@@ -9,6 +9,13 @@
   <meta property="og:description" content="Tu tesorería bajo control. Siempre." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://santaglia.app" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <meta name="theme-color" content="#1a2d80" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Compass" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -60,7 +67,10 @@
       font-size: 1.1rem;
       color: #fff;
       letter-spacing: 0.02em;
-      display: flex; align-items: center; gap: 0.5rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .nav-logo img {
+      height: 32px; width: auto; display: block;
     }
     .nav-logo span {
       color: #6ee7a0;
@@ -83,21 +93,27 @@
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       padding: 7rem 1.5rem 4rem;
       text-align: center;
-      background:
-        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(46,67,168,0.5) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(30,132,73,0.15) 0%, transparent 60%),
-        var(--navy-d);
+      background: var(--navy-d);
       position: relative; overflow: hidden;
     }
-    .hero::before {
-      content: '';
+    /* Video background */
+    .hero-video {
       position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 1;
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* Overlay: asegura legibilidad del texto sobre el video */
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(17,30,90,0.72) 0%, rgba(17,30,90,0.60) 60%, rgba(17,30,90,0.82) 100%);
+      z-index: 1;
       pointer-events: none;
     }
+    .hero > *:not(.hero-video):not(.hero-overlay) { position: relative; z-index: 2; }
 
     .hero-eyebrow {
       font-family: var(--brand);
@@ -451,13 +467,21 @@
   <!-- Nav -->
   <nav>
     <div class="nav-logo">
-      🧭 Santaglia <span>Compass</span>
+      <img src="logo.png" alt="Santaglia Compass" />
+      Santaglia <span>Compass</span>
     </div>
     <div class="nav-badge">Beta próxima</div>
   </nav>
 
   <!-- Hero -->
   <section class="hero">
+    <!-- Video de fondo -->
+    <video class="hero-video" autoplay muted loop playsinline preload="auto">
+      <source src="brand.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-overlay"></div>
+
+    <img src="logo.png" alt="Santaglia Compass" style="height:72px;width:auto;margin-bottom:1.25rem;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.4));" />
     <div class="hero-eyebrow">Próximamente · santaglia.app</div>
     <h1>Tu tesorería<br><em>bajo control.</em><br>Siempre.</h1>
     <p class="hero-sub">La plataforma de gestión financiera diseñada exclusivamente para PyMEs mexicanas.</p>
@@ -662,6 +686,20 @@
     }
     handleForm('waitlist-form', 'form-success');
     handleForm('waitlist-form-2', 'form-success-2');
+
+    // Registrar Service Worker (PWA)
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    }
+
+    // Safari autoplay fix — muted must be set via JS property
+    const vid = document.querySelector('.hero-video');
+    if (vid) {
+      vid.muted = true;
+      vid.setAttribute('playsinline', '');
+      vid.setAttribute('webkit-playsinline', '');
+      vid.play().catch(() => {});
+    }
   </script>
 
 </body>
