@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Santaglia Compass — Tu tesorería bajo control. Siempre.</title>
+  <meta name="description" content="La plataforma de gestión financiera diseñada para PyMEs mexicanas. Flujo de caja, egresos, nómina y conexión directa con el SAT — todo en un solo lugar." />
+  <meta property="og:title" content="Santaglia Compass" />
+  <meta property="og:description" content="Tu tesorería bajo control. Siempre." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://santaglia.app" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Variables ── */
+    :root {
+      --navy:      #1a2d80;
+      --navy-d:    #111e5a;
+      --navy-l:    #2d43a8;
+      --navy-pale: #e8ecf8;
+      --green:     #1e8449;
+      --green-l:   #27ae60;
+      --green-pale:#f0fdf4;
+      --text:      #1a1c2e;
+      --text-dim:  #5a6578;
+      --border:    #dde1ea;
+      --bg:        #f4f5f8;
+      --white:     #ffffff;
+      --font:      'Inter', sans-serif;
+      --brand:     'Exo 2', sans-serif;
+      --radius:    6px;
+      --shadow:    0 1px 4px rgba(26,45,128,0.08);
+      --shadow-md: 0 4px 24px rgba(26,45,128,0.14);
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--navy-d);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(17, 30, 90, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-logo {
+      font-family: var(--brand);
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #fff;
+      letter-spacing: 0.02em;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .nav-logo span {
+      color: #6ee7a0;
+    }
+    .nav-badge {
+      font-size: 0.65rem;
+      font-family: var(--brand);
+      font-weight: 600;
+      color: #6ee7a0;
+      border: 1px solid #6ee7a0;
+      border-radius: 20px;
+      padding: 0.15rem 0.55rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 7rem 1.5rem 4rem;
+      text-align: center;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(46,67,168,0.5) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(30,132,73,0.15) 0%, transparent 60%),
+        var(--navy-d);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--brand);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #6ee7a0;
+      margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .hero-eyebrow::before, .hero-eyebrow::after {
+      content: '';
+      display: block; width: 2rem; height: 1px;
+      background: #6ee7a0;
+      opacity: 0.5;
+    }
+
+    .hero h1 {
+      font-family: var(--brand);
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      max-width: 700px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: #6ee7a0;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 0.5rem;
+      font-weight: 300;
+      max-width: 520px;
+    }
+    .hero-tagline {
+      font-family: var(--brand);
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2.25rem;
+      max-width: 560px;
+    }
+
+    /* ── Chips ── */
+    .chip-row {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      justify-content: center; margin-bottom: 2.5rem;
+    }
+    .chip {
+      font-size: 0.72rem;
+      font-family: var(--brand);
+      font-weight: 600;
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.12);
+      letter-spacing: 0.02em;
+    }
+    .chip.green {
+      background: rgba(110,231,160,0.1);
+      color: #6ee7a0;
+      border-color: rgba(110,231,160,0.25);
+    }
+
+    /* ── Form ── */
+    .form-wrap {
+      width: 100%; max-width: 480px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 1.75rem;
+      backdrop-filter: blur(8px);
+      margin-bottom: 1.5rem;
+    }
+    .form-wrap h3 {
+      font-family: var(--brand);
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.3rem;
+    }
+    .form-wrap p {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 1.1rem;
+    }
+    .form-row {
+      display: flex; gap: 0.5rem;
+    }
+    .form-wrap input[type="email"] {
+      flex: 1;
+      padding: 0.7rem 1rem;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 150ms;
+    }
+    .form-wrap input[type="email"]::placeholder { color: rgba(255,255,255,0.35); }
+    .form-wrap input[type="email"]:focus { border-color: #6ee7a0; }
+    .form-wrap button[type="submit"] {
+      padding: 0.7rem 1.25rem;
+      border-radius: var(--radius);
+      background: var(--green);
+      color: #fff;
+      font-family: var(--brand);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      border: none;
+      white-space: nowrap;
+      transition: background 150ms, transform 100ms;
+    }
+    .form-wrap button[type="submit"]:hover { background: var(--green-l); transform: translateY(-1px); }
+    .form-wrap button[type="submit"]:active { transform: translateY(0); }
+    .form-note {
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.3);
+      margin-top: 0.65rem;
+      text-align: center;
+    }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 1rem;
+      color: #6ee7a0;
+      font-family: var(--brand);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .form-success span { font-size: 1.5rem; display: block; margin-bottom: 0.4rem; }
+
+    /* ── Features ── */
+    .features {
+      background: var(--bg);
+      padding: 5rem 1.5rem;
+    }
+    .section-label {
+      text-align: center;
+      font-family: var(--brand);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      text-align: center;
+      font-family: var(--brand);
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+    .section-sub {
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      max-width: 540px;
+      margin: 0 auto 3rem;
+      line-height: 1.65;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .feat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: box-shadow 200ms, transform 200ms;
+    }
+    .feat-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .feat-icon {
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .feat-card h4 {
+      font-family: var(--brand);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+    }
+    .feat-card p {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+    .feat-tag {
+      display: inline-block;
+      margin-top: 0.65rem;
+      font-size: 0.62rem;
+      font-family: var(--brand);
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border-radius: 20px;
+      background: var(--navy-pale);
+      color: var(--navy);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .feat-tag.green { background: var(--green-pale); color: var(--green); }
+
+    /* ── Who ── */
+    .who {
+      background: var(--white);
+      padding: 5rem 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .who-card {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .who-card .who-icon { font-size: 2rem; margin-bottom: 0.6rem; }
+    .who-card h5 {
+      font-family: var(--brand);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.3rem;
+    }
+    .who-card p { font-size: 0.75rem; color: var(--text-dim); }
+
+    /* ── Timeline ── */
+    .timeline {
+      background: var(--bg);
+      padding: 5rem 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .tl-wrap {
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .tl-wrap::before {
+      content: '';
+      position: absolute; left: 1.1rem; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--navy), var(--green));
+      opacity: 0.2;
+    }
+    .tl-item {
+      display: flex; gap: 1.25rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .tl-dot {
+      flex-shrink: 0;
+      width: 2.2rem; height: 2.2rem;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      font-family: var(--brand);
+      position: relative; z-index: 1;
+    }
+    .tl-dot.done { background: var(--green); color: #fff; }
+    .tl-dot.active { background: var(--navy); color: #fff; }
+    .tl-dot.soon { background: var(--border); color: var(--text-dim); }
+    .tl-body { padding-top: 0.1rem; }
+    .tl-date {
+      font-size: 0.68rem;
+      font-family: var(--brand);
+      font-weight: 600;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.2rem;
+    }
+    .tl-body h4 {
+      font-family: var(--brand);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.2rem;
+    }
+    .tl-body p { font-size: 0.8rem; color: var(--text-dim); }
+
+    /* ── CTA footer ── */
+    .cta-footer {
+      background: linear-gradient(135deg, var(--navy-d) 0%, var(--navy) 100%);
+      padding: 5rem 1.5rem;
+      text-align: center;
+    }
+    .cta-footer h2 {
+      font-family: var(--brand);
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .cta-footer p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 2rem;
+    }
+    .cta-footer .form-wrap {
+      margin: 0 auto;
+      max-width: 460px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--navy-d);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.3);
+      font-family: var(--brand);
+    }
+    footer a { color: rgba(255,255,255,0.45); text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .form-row { flex-direction: column; }
+      nav { padding: 0.85rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-logo">
+      🧭 Santaglia <span>Compass</span>
+    </div>
+    <div class="nav-badge">Beta próxima</div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-eyebrow">Próximamente · santaglia.app</div>
+    <h1>Tu tesorería<br><em>bajo control.</em><br>Siempre.</h1>
+    <p class="hero-sub">La plataforma de gestión financiera diseñada exclusivamente para PyMEs mexicanas.</p>
+    <p class="hero-tagline">Flujo de caja · SAT · Nómina · Todo en un solo lugar.</p>
+
+    <div class="chip-row">
+      <span class="chip green">Conexión SAT directa</span>
+      <span class="chip green">Monitor de Cumplimiento</span>
+      <span class="chip">ISR · IVA · RESICO</span>
+      <span class="chip">Proyección de flujo</span>
+      <span class="chip">Nómina asimilables</span>
+      <span class="chip">100% mexicano</span>
+    </div>
+
+    <div class="form-wrap">
+      <h3>Sé el primero en acceder</h3>
+      <p>Únete a la lista de espera y obtén acceso beta gratuito durante los primeros 3 meses.</p>
+      <form id="waitlist-form" action="https://formspree.io/f/xojbjknp" method="POST">
+        <div class="form-row">
+          <input type="email" name="email" placeholder="tu@empresa.com" required autocomplete="email" />
+          <button type="submit">Quiero acceso →</button>
+        </div>
+        <input type="hidden" name="fuente" value="santaglia.app landing" />
+        <p class="form-note">Sin spam. Sin compromisos. Solo te avisamos cuando abramos.</p>
+      </form>
+      <div class="form-success" id="form-success">
+        <span>✅</span>
+        ¡Estás en la lista! Te avisamos en cuanto abramos la beta.
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="section-label">Qué incluye</div>
+    <h2 class="section-title">Todo lo que tu empresa necesita.<br>Nada que no uses.</h2>
+    <p class="section-sub">
+      Diseñado desde cero para la realidad fiscal y financiera de las PyMEs mexicanas.
+      Sin configuraciones interminables. Sin curva de aprendizaje.
+    </p>
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon">🏦</div>
+        <h4>Proyección de flujo de caja</h4>
+        <p>Visualiza tus entradas y salidas proyectadas mes a mes. Detecta déficits antes de que ocurran y actúa a tiempo.</p>
+        <span class="feat-tag">Listo</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🔗</div>
+        <h4>Conexión SAT automática</h4>
+        <p>Descarga tus CFDIs emitidos y recibidos directamente del SAT con RFC+CIEC o e.firma. Sync automático 2–4 veces al día.</p>
+        <span class="feat-tag green">Nuevo</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🛡️</div>
+        <h4>Monitor SAT mensual</h4>
+        <p>Tu Constancia de Situación Fiscal y Opinión de Cumplimiento descargadas automáticamente cada mes. Alerta inmediata si algo cambia.</p>
+        <span class="feat-tag green">Nuevo</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">👥</div>
+        <h4>Nómina asimilables y honorarios</h4>
+        <p>Genera recibos de pago, calcula retenciones ISR y lleva el control de tus colaboradores sin complicaciones.</p>
+        <span class="feat-tag">Listo</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📊</div>
+        <h4>Egresos e ISR/IVA</h4>
+        <p>Registra gastos, clasifícalos por categoría y mantén tus impuestos al día. Compatible con RESICO y régimen general.</p>
+        <span class="feat-tag">Listo</span>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🔄</div>
+        <h4>Reconciliación proyectado/real</h4>
+        <p>Compara automáticamente lo proyectado vs. lo que realmente sucedió. El sistema aprende y ajusta tus proyecciones.</p>
+        <span class="feat-tag green">Próximamente</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who -->
+  <section class="who">
+    <div class="section-label">Para quién es</div>
+    <h2 class="section-title">Hecho para PyMEs que ya facturan</h2>
+    <p class="section-sub">No es para startups sin ingresos ni para corporativos con CFO. Es para el empresario mexicano que lleva las riendas de su negocio.</p>
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="who-icon">🏪</div>
+        <h5>Comercios y servicios</h5>
+        <p>Con 2–20 colaboradores y ventas regulares que requieren orden financiero real.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">⚖️</div>
+        <h5>Despachos profesionales</h5>
+        <p>Contadores, abogados, consultores con nómina asimilable y honorarios frecuentes.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">🏗️</div>
+        <h5>Constructoras y agencias</h5>
+        <p>Proyectos con múltiples clientes, flujo irregular y necesidad de proyección confiable.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">🛒</div>
+        <h5>E-commerce y distribuidores</h5>
+        <p>Con proveedores, inventario y cuentas por pagar que hay que mantener bajo control.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="timeline">
+    <div class="section-label">Hoja de ruta</div>
+    <h2 class="section-title">Cuándo llega</h2>
+    <p class="section-sub" style="margin-bottom:2.5rem">Estamos en fase de laboratorio. La beta cerrada abre en julio 2026 — con acceso gratuito para los primeros inscritos.</p>
+    <div class="tl-wrap">
+      <div class="tl-item">
+        <div class="tl-dot done">✓</div>
+        <div class="tl-body">
+          <div class="tl-date">Ene – Jun 2026</div>
+          <h4>Etapa 0 · Laboratorio</h4>
+          <p>Sistema funcionando en producción propia. Módulos core validados en operación real.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot active">2</div>
+        <div class="tl-body">
+          <div class="tl-date">Jul – Sep 2026</div>
+          <h4>Etapa 1 · Beta cerrada</h4>
+          <p>Primeros 20–30 clientes seleccionados de la lista de espera. Acceso gratuito durante la beta.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot soon">3</div>
+        <div class="tl-body">
+          <div class="tl-date">Oct – Dic 2026</div>
+          <h4>Etapa 2 · Lanzamiento</h4>
+          <p>Apertura general con planes de suscripción desde $299 MXN/mes. Conexión SAT y Monitor activos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Footer -->
+  <section class="cta-footer">
+    <h2>¿Tu negocio ya merece<br>claridad financiera real?</h2>
+    <p>Únete ahora y accede gratis durante la beta. Sin tarjeta. Sin letra chica.</p>
+    <div class="form-wrap">
+      <h3>Reserva tu lugar</h3>
+      <p>Solo avisamos cuando abramos. Nada más.</p>
+      <form id="waitlist-form-2" action="https://formspree.io/f/xojbjknp" method="POST">
+        <div class="form-row">
+          <input type="email" name="email" placeholder="tu@empresa.com" required autocomplete="email" />
+          <button type="submit">Apuntarme →</button>
+        </div>
+        <input type="hidden" name="fuente" value="santaglia.app cta-footer" />
+        <p class="form-note">Sin spam. Sin compromisos. Solo te avisamos cuando abramos.</p>
+      </form>
+      <div class="form-success" id="form-success-2">
+        <span>✅</span>
+        ¡Listo! Te contactamos antes de abrir la beta.
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Santaglia · <a href="https://www.santaglia.com" target="_blank">santaglia.com</a> · Hecho en México 🇲🇽</p>
+    <p style="margin-top:0.4rem">
+      <a href="mailto:hola@santaglia.com">hola@santaglia.com</a>
+    </p>
+  </footer>
+
+  <script>
+    // Form submission handler (Formspree AJAX)
+    function handleForm(formId, successId) {
+      const form = document.getElementById(formId);
+      if (!form) return;
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btn = form.querySelector('button[type="submit"]');
+        const orig = btn.textContent;
+        btn.textContent = 'Enviando...';
+        btn.disabled = true;
+        try {
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (res.ok) {
+            form.style.display = 'none';
+            document.getElementById(successId).style.display = 'block';
+          } else {
+            btn.textContent = 'Error — intenta de nuevo';
+            btn.disabled = false;
+          }
+        } catch(err) {
+          btn.textContent = 'Error — intenta de nuevo';
+          btn.disabled = false;
+        }
+      });
+    }
+    handleForm('waitlist-form', 'form-success');
+    handleForm('waitlist-form-2', 'form-success-2');
+  </script>
+
+</body>
+</html>
