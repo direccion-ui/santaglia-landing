@@ -455,10 +455,240 @@
     }
     footer a { color: rgba(255,255,255,0.45); text-decoration: underline; }
 
+    /* ── Dolores → Remedios ── */
+    .dolores {
+      background: linear-gradient(160deg, var(--navy-d) 0%, var(--navy) 100%);
+      padding: 5rem 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .dolores .section-label { color: rgba(255,255,255,0.45); }
+    .dolores .section-title { color: #fff; }
+    .dolores .section-sub { color: rgba(255,255,255,0.55); }
+    .dolores-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      max-width: 960px;
+      margin: 2.5rem auto 0;
+    }
+    .dolor-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 12px;
+      padding: 1.25rem 1.25rem 1rem;
+      transition: background 200ms;
+    }
+    .dolor-card:hover { background: rgba(255,255,255,0.09); }
+    .dolor-pain {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.55);
+      font-style: italic;
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+    .dolor-pain::before { content: '"'; }
+    .dolor-pain::after  { content: '"'; }
+    .dolor-cure {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+    }
+    .dolor-pill {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+    .dolor-cure-text {
+      font-size: 0.82rem;
+      color: #6ee7a0;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    /* ── Pricing básico ── */
+    .pricing-basic {
+      background: var(--white);
+      padding: 5rem 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .pricing-basic-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      max-width: 860px;
+      margin: 2.5rem auto 0;
+    }
+    .pb-card {
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: box-shadow 200ms, transform 200ms;
+    }
+    .pb-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .pb-card.featured {
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(26,45,128,0.10);
+    }
+    .pb-head {
+      padding: 1.5rem 1.5rem 1.1rem;
+      background: var(--bg);
+    }
+    .pb-card.featured .pb-head { background: var(--navy); }
+    .pb-tier {
+      font-size: 0.65rem;
+      font-family: var(--brand);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+    }
+    .pb-card.featured .pb-tier { color: #6ee7a0; }
+    .pb-price {
+      font-family: var(--brand);
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .pb-card.featured .pb-price { color: #fff; }
+    .pb-price span { font-size: 0.8rem; font-weight: 400; opacity: 0.6; }
+    .pb-target {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      margin-top: 0.3rem;
+    }
+    .pb-card.featured .pb-target { color: rgba(255,255,255,0.6); }
+    .pb-body {
+      padding: 1.1rem 1.5rem 1.5rem;
+    }
+    .pb-body ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1rem;
+    }
+    .pb-body li {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      padding: 0.3rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.45rem;
+      line-height: 1.45;
+    }
+    .pb-body li::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 700;
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      margin-top: 0.05rem;
+    }
+    .pb-cta {
+      display: block;
+      text-align: center;
+      font-family: var(--brand);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 0.65rem 1rem;
+      border-radius: 6px;
+      text-decoration: none;
+      background: var(--navy-pale);
+      color: var(--navy);
+      transition: background 150ms;
+    }
+    .pb-cta:hover { background: var(--navy); color: #fff; }
+    .pb-card.featured .pb-cta { background: #6ee7a0; color: var(--navy-d); }
+    .pb-card.featured .pb-cta:hover { background: #4ade80; }
+    .pb-note {
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      margin-top: 1.5rem;
+    }
+
+    /* ── Fundador ── */
+    .founder {
+      background: var(--bg);
+      padding: 4rem 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .founder-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .founder-quote {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--navy);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding: 0 1rem;
+    }
+    .founder-quote::before {
+      content: '\201C';
+      font-size: 4rem;
+      color: var(--navy-pale);
+      position: absolute;
+      top: -1rem;
+      left: -0.25rem;
+      font-style: normal;
+      line-height: 1;
+    }
+    .founder-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.85rem;
+    }
+    .founder-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy), var(--navy-l));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .founder-name {
+      font-family: var(--brand);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .founder-role {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+    .founder-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--green-pale);
+      color: var(--green);
+      font-size: 0.65rem;
+      font-family: var(--brand);
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      margin-top: 1rem;
+      letter-spacing: 0.04em;
+    }
+
     /* ── Responsive ── */
     @media (max-width: 600px) {
       .form-row { flex-direction: column; }
       nav { padding: 0.85rem 1.25rem; }
+      .pricing-basic-grid { grid-template-columns: 1fr; }
+      .dolores-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 820px) {
+      .pricing-basic-grid { grid-template-columns: 1fr; max-width: 380px; }
     }
   </style>
 </head>
@@ -482,7 +712,7 @@
     <div class="hero-overlay"></div>
 
     <img src="logo.png" alt="Santaglia Compass" style="height:72px;width:auto;margin-bottom:1.25rem;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.4));" />
-    <div class="hero-eyebrow">Próximamente · santaglia.app</div>
+    <div class="hero-eyebrow">Beta · Q3 2026</div>
     <h1>Tu tesorería<br><em>bajo control.</em><br>Siempre.</h1>
     <p class="hero-sub">La plataforma de gestión financiera diseñada exclusivamente para micro-empresas mexicanas de 1 a 10 personas.</p>
     <p class="hero-tagline">Flujo de caja · SAT · Nómina · Todo en un solo lugar.</p>
@@ -569,6 +799,80 @@
     </div>
   </section>
 
+  <!-- Dolores → Remedios -->
+  <section class="dolores">
+    <div class="section-label">El diagnóstico</div>
+    <h2 class="section-title">Los dolores de cabeza que Compass elimina</h2>
+    <p class="section-sub">Cada función de Compass existe porque alguien — probablemente tú — ha vivido exactamente este problema.</p>
+    <div class="dolores-grid">
+
+      <div class="dolor-card">
+        <div class="dolor-pain">No sé cuánto voy a tener en caja la próxima quincena</div>
+        <div class="dolor-cure">
+          <div class="dolor-pill">💊</div>
+          <div class="dolor-cure-text">Proyección de flujo de caja mes a mes — con alertas antes de que el déficit ocurra</div>
+        </div>
+      </div>
+
+      <div class="dolor-card">
+        <div class="dolor-pain">Tengo que bajar el estado de cuenta y cruzarlo a mano en Excel</div>
+        <div class="dolor-cure">
+          <div class="dolor-pill">💊</div>
+          <div class="dolor-cure-text">Sincronización bancaria automática — tus movimientos llegan solos, categorizados</div>
+        </div>
+      </div>
+
+      <div class="dolor-card">
+        <div class="dolor-pain">Mi contador me llama cada dos meses con una sorpresa de ISR</div>
+        <div class="dolor-cure">
+          <div class="dolor-pill">💊</div>
+          <div class="dolor-cure-text">ISR provisional estimado automáticamente — sin hojas de cálculo, sin esperar al contador</div>
+        </div>
+      </div>
+
+      <div class="dolor-card">
+        <div class="dolor-pain">Nunca sé si mis retenciones están al corriente o si ya me cae una multa</div>
+        <div class="dolor-cure">
+          <div class="dolor-pill">💊</div>
+          <div class="dolor-cure-text">Monitor SAT mensual — CSF y Opinión de Cumplimiento descargados automáticamente. Alerta inmediata si algo cambia</div>
+        </div>
+      </div>
+
+      <div class="dolor-card">
+        <div class="dolor-pain">Tengo tickets de gasolineras y restaurantes que nunca se facturan</div>
+        <div class="dolor-cure">
+          <div class="dolor-pill">💊</div>
+          <div class="dolor-cure-text">Factura Express — foto del ticket vía Telegram → CFDI en tu correo de forma automática</div>
+        </div>
+      </div>
+
+      <div class="dolor-card">
+        <div class="dolor-pain">Los CFDIs que necesito nunca llegan al contador a tiempo</div>
+        <div class="dolor-cure">
+          <div class="dolor-pill">💊</div>
+          <div class="dolor-cure-text">Conexión SAT directa — descarga automática de todos tus CFDIs emitidos y recibidos con RFC + CIEC</div>
+        </div>
+      </div>
+
+      <div class="dolor-card">
+        <div class="dolor-pain">Llevo la nómina de mis colaboradores en un Excel que nadie más entiende</div>
+        <div class="dolor-cure">
+          <div class="dolor-pill">💊</div>
+          <div class="dolor-cure-text">Módulo de nómina asimilables y honorarios — recibos de pago, retenciones ISR y control en un solo lugar</div>
+        </div>
+      </div>
+
+      <div class="dolor-card">
+        <div class="dolor-pain">Me llega un cargo que no reconozco y no sé cómo reclamarlo</div>
+        <div class="dolor-cure">
+          <div class="dolor-pill">💊</div>
+          <div class="dolor-cure-text">Alerta inmediata de cargo no reconocido + seguimiento de aclaración bancaria con fechas CNBV automáticas</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- Who -->
   <section class="who">
     <div class="section-label">Para quién es</div>
@@ -599,6 +903,90 @@
         <h5>E-commerce y distribuidores</h5>
         <p>Con proveedores, inventario y cuentas por pagar que hay que mantener bajo control.</p>
       </div>
+    </div>
+  </section>
+
+  <!-- Pricing básico -->
+  <section class="pricing-basic">
+    <div class="section-label">Precios</div>
+    <h2 class="section-title">Transparente desde el primer día</h2>
+    <p class="section-sub">Sin letra chica. Sin tarifas ocultas. Cancela cuando quieras.</p>
+
+    <div class="pricing-basic-grid">
+
+      <div class="pb-card">
+        <div class="pb-head">
+          <div class="pb-tier">Básico</div>
+          <div class="pb-price">$299<span> MXN/mes</span></div>
+          <div class="pb-target">PFAE · Consultor · 1 usuario</div>
+        </div>
+        <div class="pb-body">
+          <ul>
+            <li>Dashboard + proyección 90 días</li>
+            <li>Movimientos bancarios (3 cuentas)</li>
+            <li>Nómina asimilables y honorarios</li>
+            <li>Egresos, retenciones ISR/IVA</li>
+            <li>Importación manual de CFDIs</li>
+          </ul>
+          <a href="#waitlist-form" class="pb-cta">Unirme a la lista →</a>
+        </div>
+      </div>
+
+      <div class="pb-card featured">
+        <div class="pb-head">
+          <div class="pb-tier">⭐ Estándar — Más popular</div>
+          <div class="pb-price">$799<span> MXN/mes</span></div>
+          <div class="pb-target">Micro-empresa con equipo · hasta 5 usuarios</div>
+        </div>
+        <div class="pb-body">
+          <ul>
+            <li>Todo lo del plan Básico</li>
+            <li>Conexión SAT directa — CFDIs automáticos</li>
+            <li>Monitor SAT mensual + alertas proactivas</li>
+            <li>ISR provisional estimado (PFAE + PM)</li>
+            <li>Telegram Bot · Factura Express</li>
+            <li>Sincronización bancaria Belvo <span style="font-size:0.65rem;background:rgba(255,255,255,0.2);border-radius:3px;padding:1px 4px;">Q1 2027</span></li>
+          </ul>
+          <a href="#waitlist-form" class="pb-cta">Unirme a la lista →</a>
+        </div>
+      </div>
+
+      <div class="pb-card">
+        <div class="pb-head">
+          <div class="pb-tier">Pro</div>
+          <div class="pb-price">$1,999<span> MXN/mes</span></div>
+          <div class="pb-target">Operación completa · usuarios ilimitados</div>
+        </div>
+        <div class="pb-body">
+          <ul>
+            <li>Todo lo del plan Estándar</li>
+            <li>CRM completo + pipeline de ventas</li>
+            <li>Timesheet + proyectos con rentabilidad</li>
+            <li>Propuestas y contratos</li>
+            <li>Cuentas bancarias ilimitadas</li>
+          </ul>
+          <a href="#waitlist-form" class="pb-cta">Unirme a la lista →</a>
+        </div>
+      </div>
+
+    </div>
+    <p class="pb-note">Durante la beta, acceso gratuito para los primeros inscritos · Precio fijo en MXN · Sin ajustes por tipo de cambio</p>
+  </section>
+
+  <!-- Fundador -->
+  <section class="founder">
+    <div class="founder-inner">
+      <blockquote class="founder-quote">
+        Compass nació de mi propio dolor de cabeza. Llevaba las finanzas de mi empresa en Excel, con tres bancos distintos, nómina en WhatsApp y siempre llegando tarde a las retenciones. Construí el sistema que yo necesitaba — y resultó que miles de empresas en México necesitan exactamente lo mismo.
+      </blockquote>
+      <div class="founder-meta">
+        <div class="founder-avatar">👤</div>
+        <div>
+          <div class="founder-name">Carlos, fundador de Santaglia</div>
+          <div class="founder-role">Usuario #1 de Compass · lo usa todos los días en su propia empresa</div>
+        </div>
+      </div>
+      <div class="founder-badge">✅ Construido desde adentro — no desde una presentación de PowerPoint</div>
     </div>
   </section>
 
