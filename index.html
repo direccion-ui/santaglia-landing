@@ -210,7 +210,7 @@
     .form-row {
       display: flex; gap: 0.5rem;
     }
-    .form-wrap input[type="email"] {
+    .form-wrap input[type="email"], .form-wrap input[name="referido"] {
       flex: 1;
       padding: 0.7rem 1rem;
       border-radius: var(--radius);
@@ -221,8 +221,8 @@
       outline: none;
       transition: border-color 150ms;
     }
-    .form-wrap input[type="email"]::placeholder { color: rgba(255,255,255,0.35); }
-    .form-wrap input[type="email"]:focus { border-color: #6ee7a0; }
+    .form-wrap input[type="email"]::placeholder, .form-wrap input[name="referido"]::placeholder { color: rgba(255,255,255,0.35); }
+    .form-wrap input[type="email"]:focus, .form-wrap input[name="referido"]:focus { border-color: #6ee7a0; }
     .form-wrap button[type="submit"] {
       padding: 0.7rem 1.25rem;
       border-radius: var(--radius);
@@ -735,6 +735,7 @@
           <button type="submit">Quiero acceso →</button>
         </div>
         <input type="hidden" name="fuente" value="santaglia.app landing" />
+        <input type="text" name="referido" placeholder="¿Quién te recomendó? (opcional)" autocomplete="off" style="width:100%;margin-top:0.5rem;" />
         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
         <p class="form-note">Sin spam. Sin compromisos. Solo te avisamos cuando abramos. Al apuntarte aceptas el <a href="privacidad.html" style="color:inherit;text-decoration:underline;">aviso de privacidad</a>.</p>
       </form>
@@ -1083,6 +1084,7 @@
           <button type="submit">Apuntarme →</button>
         </div>
         <input type="hidden" name="fuente" value="santaglia.app cta-footer" />
+        <input type="text" name="referido" placeholder="¿Quién te recomendó? (opcional)" autocomplete="off" style="width:100%;margin-top:0.5rem;" />
         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
         <p class="form-note">Sin spam. Sin compromisos. Solo te avisamos cuando abramos. Al apuntarte aceptas el <a href="privacidad.html" style="color:inherit;text-decoration:underline;">aviso de privacidad</a>.</p>
       </form>
@@ -1106,6 +1108,19 @@
     // Endpoint de Santaglia Compass para registro automático + bienvenida
     const _STGL_WL = 'https://vblazgxsyidxttobiszt.supabase.co/functions/v1/waitlist-inbound';
 
+    // Atribución de la fuente: prioridad (1) ?ref= del link (canal o amigo que compartió: santaglia.app?ref=ana),
+    // (2) campo opcional "¿quién te recomendó?", (3) el default del propio form (landing / cta-footer). Se refleja
+    // en la columna Fuente del CRM (Waitlist · Beta CRM) → para saber quién refirió y mandarle el agradecimiento.
+    function _stglFuente(form) {
+      try {
+        const ref = (new URLSearchParams(location.search).get('ref') || '').trim();
+        if (ref) return ref.slice(0, 60);
+        const refd = (form.querySelector('input[name="referido"]')?.value || '').trim();
+        if (refd) return 'Recomendado por: ' + refd.slice(0, 60);
+      } catch (e) {}
+      return (form.querySelector('input[name="fuente"]')?.value || 'santaglia.app landing');
+    }
+
     // Form submission handler — llama a Formspree (notificación) y a Supabase (registro + email bienvenida) en paralelo
     function handleForm(formId, successId) {
       const form = document.getElementById(formId);
@@ -1118,6 +1133,8 @@
         btn.disabled = true;
         try {
           const email = (form.querySelector('input[name="email"]')?.value || '').trim();
+          const fuente = _stglFuente(form);
+          const _hf = form.querySelector('input[name="fuente"]'); if (_hf) _hf.value = fuente;   // que Formspree reciba la misma fuente
           // Llamadas paralelas: Formspree (notificación a Carlos) + Edge Function (registro + email bienvenida)
           const [res] = await Promise.all([
             fetch(form.action, {
@@ -1128,7 +1145,7 @@
             email ? fetch(_STGL_WL, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ email, fuente: 'santaglia.app landing' })
+              body: JSON.stringify({ email, fuente })
             }).catch(() => {}) : Promise.resolve()
           ]);
           if (res.ok) {
