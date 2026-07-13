@@ -273,6 +273,22 @@
       background: var(--bg);
       padding: 4.5rem 1.5rem 4rem;
     }
+
+    /* ── Video demo ── */
+    .video-demo {
+      background: #fff;
+      padding: 4.5rem 1.5rem 4rem;
+      text-align: center;
+    }
+    .video-demo .video-wrap { max-width: 960px; margin: 2rem auto 0; }
+    .video-demo video {
+      width: 100%;
+      display: block;
+      border-radius: 14px;
+      box-shadow: 0 18px 50px rgba(11, 27, 58, 0.28);
+      background: #0b1b3a;
+    }
+    .video-demo .video-note { margin-top: 0.9rem; font-size: 0.85rem; color: rgba(11,27,58,0.55); }
     .shot-tabs {
       display: flex; flex-wrap: wrap; justify-content: center;
       gap: 0.5rem;
@@ -740,6 +756,20 @@
       </div>
     </div>
     <a id="wa-btn" class="wa-btn" hidden target="_blank" rel="noopener">💬 o escríbeme por WhatsApp</a>
+  </section>
+
+  <!-- Video: demo completa -->
+  <section class="video-demo" id="video">
+    <div class="section-label">Míralo funcionando</div>
+    <h2 class="section-title">La demo completa, en 6 minutos</h2>
+    <p class="section-sub">Una empresa de demostración, de principio a fin: del estado de cuenta y las facturas del SAT a las respuestas que necesitas — sin capturar nada a mano.</p>
+    <div class="video-wrap">
+      <video controls preload="none" playsinline poster="video/poster.jpg">
+        <source src="video/demo-compass.mp4" type="video/mp4" />
+        Tu navegador no puede reproducir el video. <a href="video/demo-compass.mp4">Descárgalo aquí</a>.
+      </video>
+      <p class="video-note">6:07 min · con audio · «Compass estima y prepara; tu contador determina.»</p>
+    </div>
   </section>
 
   <!-- Producto: capturas interactivas -->
