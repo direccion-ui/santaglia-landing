@@ -238,6 +238,9 @@
     }
     .wa-btn:hover { background: #25c264; transform: translateY(-1px); }
     .wa-btn[hidden] { display: none; }
+    .wa-nums { margin-top: 0.6rem; font-size: 0.95rem; color: #8ea3c4; }
+    .wa-nums a { color: inherit; text-decoration: underline; font-weight: 600; cursor: pointer; }
+    .wa-nums[hidden] { display: none; }
 
     /* ── Secciones base ── */
     .section-label {
@@ -755,7 +758,8 @@
         ¡Listo! Te escribo en menos de 24 horas para activarte. — Carlos
       </div>
     </div>
-    <a id="wa-btn" class="wa-btn" hidden target="_blank" rel="noopener">💬 o escríbeme por WhatsApp</a>
+    <a id="wa-btn" class="wa-btn" hidden target="_blank" rel="noopener">💬 o escríbenos por WhatsApp</a>
+    <p id="wa-nums" class="wa-nums" hidden>📱 WhatsApp <a data-wa="1" target="_blank" rel="noopener">56 1422 0516</a> · <a data-wa="2" target="_blank" rel="noopener">56 1137 2685</a></p>
   </section>
 
   <!-- Video: demo completa -->
@@ -764,11 +768,11 @@
     <h2 class="section-title">La demo completa, en 4 minutos</h2>
     <p class="section-sub">Una empresa de demostración, de principio a fin: del estado de cuenta y las facturas del SAT a las respuestas que necesitas — sin capturar nada a mano.</p>
     <div class="video-wrap">
-      <video controls preload="none" playsinline poster="video/poster-v24.jpg">
-        <source src="video/demo-compass-v24.mp4" type="video/mp4" />
-        Tu navegador no puede reproducir el video. <a href="video/demo-compass-v24.mp4">Descárgalo aquí</a>.
+      <video controls preload="none" playsinline poster="video/poster-v25.jpg">
+        <source src="video/demo-compass-v25.mp4" type="video/mp4" />
+        Tu navegador no puede reproducir el video. <a href="video/demo-compass-v25.mp4">Descárgalo aquí</a>.
       </video>
-      <p class="video-note">6:07 min · con audio · «Compass estima, te informa y avisa a tiempo; tu contador determina y elabora tu declaración.»</p>
+      <p class="video-note">4:12 min · con audio · «Compass estima, te informa y avisa a tiempo; tu contador determina y elabora tu declaración.»</p>
     </div>
   </section>
 
@@ -1053,7 +1057,8 @@
         ¡Listo! Te escribo en menos de 24 horas para activarte. — Carlos
       </div>
     </div>
-    <a id="wa-btn-2" class="wa-btn" hidden target="_blank" rel="noopener">💬 o escríbeme por WhatsApp</a>
+    <a id="wa-btn-2" class="wa-btn" hidden target="_blank" rel="noopener">💬 o escríbenos por WhatsApp</a>
+    <p id="wa-nums-2" class="wa-nums" hidden>📱 WhatsApp <a data-wa="1" target="_blank" rel="noopener">56 1422 0516</a> · <a data-wa="2" target="_blank" rel="noopener">56 1137 2685</a></p>
     <p class="cta-etapa">Beta cerrada abierta ahora (julio 2026) · Lanzamiento general Q4 2026 desde $299 MXN/mes</p>
   </section>
 
@@ -1071,13 +1076,23 @@
     const _STGL_WL   = 'https://vblazgxsyidxttobiszt.supabase.co/functions/v1/waitlist-inbound';
     const _STGL_PING = 'https://vblazgxsyidxttobiszt.supabase.co/functions/v1/landing-ping';
 
-    // ── WhatsApp directo (se activa al configurar el número, formato 521XXXXXXXXXX) ──
-    const WA_NUM = '525611372685';
+    // ── WhatsApp directo — primer número de contacto: 56 1422 0516 · segundo: 56 1137 2685 ──
+    const WA_NUM  = '525614220516';
+    const WA_NUM2 = '525611372685';
     if (WA_NUM) {
-      const waMsg = encodeURIComponent('Hola Carlos, vengo de la landing de Compass — quiero ver la demo');
+      const waMsg = encodeURIComponent('Hola, vengo de la landing de Compass — quiero ver la demo');
       ['wa-btn', 'wa-btn-2'].forEach(id => {
         const b = document.getElementById(id);
         if (b) { b.href = 'https://wa.me/' + WA_NUM + '?text=' + waMsg; b.hidden = false; }
+      });
+      ['wa-nums', 'wa-nums-2'].forEach(id => {
+        const p = document.getElementById(id);
+        if (p) {
+          p.querySelectorAll('a[data-wa]').forEach(a => {
+            a.href = 'https://wa.me/' + (a.dataset.wa === '2' ? WA_NUM2 : WA_NUM) + '?text=' + waMsg;
+          });
+          p.hidden = false;
+        }
       });
     }
 
