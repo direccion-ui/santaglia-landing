@@ -16,6 +16,14 @@
   <link rel="icon" href="favicon.ico" />
   <link rel="apple-touch-icon" href="icons/icon-192.png" />
   <meta name="theme-color" content="#1a2d80" />
+  <!-- Google tag (Google Ads AW-18542663118): mide los registros a la beta que vienen de los anuncios -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18542663118"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18542663118');
+  </script>
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Compass" />
@@ -1075,6 +1083,8 @@
     // ── Endpoints de Santaglia Compass ──
     const _STGL_WL   = 'https://vblazgxsyidxttobiszt.supabase.co/functions/v1/waitlist-inbound';
     const _STGL_PING = 'https://vblazgxsyidxttobiszt.supabase.co/functions/v1/landing-ping';
+    // Conversión de Google Ads «Registro beta Compass» (send_to = ID/etiqueta de la acción de conversión)
+    const _STGL_ADS_CONV = 'AW-18542663118/TGQzCInchq0dEM6r6olF';
 
     // ── WhatsApp directo — primer número de contacto: 56 1422 0516 · segundo: 56 1137 2685 ──
     const WA_NUM  = '525614220516';
@@ -1147,6 +1157,12 @@
             }).catch(() => {}) : Promise.resolve()
           ]);
           if (res.ok) {
+            // Google Ads: cuenta la conversión solo cuando el registro salió bien
+            try {
+              if (typeof gtag === 'function' && !/PENDIENTE/.test(_STGL_ADS_CONV)) {
+                gtag('event', 'conversion', { send_to: _STGL_ADS_CONV, value: 1.0, currency: 'MXN' });
+              }
+            } catch (e) {}
             form.style.display = 'none';
             document.getElementById(successId).style.display = 'block';
           } else {
